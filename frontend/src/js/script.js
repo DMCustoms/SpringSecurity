@@ -3,9 +3,6 @@ let page = document.querySelector('.page');
 let themeButtonDark = document.querySelector('.theme-button-dark');
 let themeButtonLight = document.querySelector('.theme-button-light');
 
-let signin = document.querySelector('.signin');
-let signinContent = document.querySelector('.signin-content');
-
 let fontButtonSansSerif = document.querySelector('.font-button-sans-serif');
 let fontButtonSerif = document.querySelector('.font-button-serif');
 
@@ -18,10 +15,6 @@ let cards = page.querySelector('.cards');
 let activePhoto = page.querySelector('.active-photo');
 
 let photoList = page.querySelectorAll('.preview-list a');
-
-signin.onclick = function() {
-    signinContent.classList.add('active');
-}
 
 themeButtonDark.onclick = function() {
     page.classList.add('dark');
