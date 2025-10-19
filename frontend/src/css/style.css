@@ -254,7 +254,7 @@ body {
 
 .auth.signin {
   width: 84px;
-  margin-right: -15px;
+  margin-right: 10px;
 }
 
 .auth:hover {
@@ -263,6 +263,37 @@ body {
 
 .auth:active {
   opacity: 0.3;
+}
+
+.authorized-user-container {
+  display: flex;
+  align-items: center;
+}
+
+.authorized-user-container a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #00c6bd;
+  border-radius: 50%;
+}
+
+.authorized-user-container a:hover {
+  opacity: 0.5;
+}
+
+.authorized-user-container a:active {
+  opacity: 0.3;
+}
+
+.authorized-user-container p {
+  margin-right: 10px;
+}
+
+.not-visible {
+  display: none;
 }
 
 /* main */

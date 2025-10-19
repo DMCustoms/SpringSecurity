@@ -79,14 +79,14 @@ jQuery(document).ready(function($){
 		$form_forgot_password.addClass('is-selected');
 	}
 
-	$form_login.find('input[type="submit"]').on('click', function(event){
-		event.preventDefault();
-		$form_login.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
-	});
-	$form_signup.find('input[type="submit"]').on('click', function(event){
-		event.preventDefault();
-		$form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
-	});
+	// $form_login.find('input[type="submit"]').on('click', function(event){
+	// 	event.preventDefault();
+	// 	$form_login.find('input[type="username"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+	// });
+	// $form_signup.find('input[type="submit"]').on('click', function(event){
+	// 	event.preventDefault();
+	// 	$form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+	// });
 
 	if(!Modernizr.input.placeholder){
 		$('[placeholder]').focus(function() {

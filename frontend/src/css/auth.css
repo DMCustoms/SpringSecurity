@@ -139,6 +139,12 @@ ul {
   .cd-form input.full-width {
     width: 100%;
   }
+  .cd-form input.full-width:hover {
+    opacity: 0.5;
+  }
+  .cd-form input.full-width:active {
+    opacity: 0.3;
+  }
   .cd-form input.has-padding {
     padding: 12px 20px 12px 50px;
   }
@@ -160,7 +166,7 @@ ul {
   .cd-form input[type=submit] {
     padding: 16px 0;
     cursor: pointer;
-    background: #2f889a;
+    background: #00c6bd;
     color: #FFF;
     font-weight: bold;
     border: none;

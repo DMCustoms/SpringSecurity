@@ -1,5 +1,8 @@
 package com.dmcustoms.backend.controllers;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,29 +39,29 @@ public class AuthController {
 	}
 
 	@PostMapping("/signup")
-	ResponseEntity<String> signup(@RequestBody SignupRequest signupRequest) {
+	ResponseEntity<Map<String, String>> signup(@RequestBody SignupRequest signupRequest) {
 		if (userRepository.existsUserByUsername(signupRequest.getUsername())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Choose different name");
+			return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("registrationResult", "Choose different name"));
 		}
 		if (userRepository.existsUserByEmail(signupRequest.getEmail())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Choose different email");
+			return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("registrationResult", "Choose different email"));
 		}
 		userRepository.save(new User(signupRequest.getUsername(), signupRequest.getEmail(), passwordEncoder.encode(signupRequest.getPassword())));
-		return ResponseEntity.ok("Success");
+		return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("registrationResult", "Success"));
 	}
 	
 	@PostMapping("/signin")
-	ResponseEntity<String> signin(@RequestBody SigninRequest signinRequest) {
+	ResponseEntity<Map<String, String>> signin(@RequestBody SigninRequest signinRequest) {
 		Authentication authentication = null;
 		try {
 			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getUsername(), signinRequest.getPassword()));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		if (authentication == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Authentication failed");
+		if (authentication == null) return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("authenticationResult", "Authentication failed"));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtCore.generateToken(authentication);
-		return ResponseEntity.ok(jwt);
+		return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("authenticationResult", jwt));
 	}
 	
 }

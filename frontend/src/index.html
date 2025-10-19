@@ -57,15 +57,17 @@
           <li class="site-navigation-item">
             <a href="#">Контакты</a>
           </li>
-          <div class="auth-container">
-            <li class="site-navigation-item">
-              <a class="auth signin" href="#">ВХОД</a>
-            </li>
-            <li class="site-navigation-item">
-              <a class="auth signup" href="#">РЕГИСТРАЦИЯ</a>
-            </li>
-        </div>
         </ul>
+        <div class="auth-container">
+            <a class="auth signin" href="#">ВХОД</a>
+            <a class="auth signup" href="#">РЕГИСТРАЦИЯ</a>
+        </div>
+        <div class="authorized-user-container not-visible">
+          <p>Username</p>
+          <a href="#">
+            <img src="img/user.svg" width="16" height="18" alt="Кабинет пользователя">
+          </a>
+        </div>
       </nav>
     </header>
     <main class="main-content">
@@ -395,7 +397,6 @@
         </ul>
       </div>
     </footer>
-    <!--Auth forms-->
     <div class="cd-user-modal">
       <div class="cd-user-modal-container">
         <ul class="cd-switcher">
@@ -403,16 +404,16 @@
           <li><a href="#0">Регистрация</a></li>
         </ul>
         <div id="cd-login">
-          <form class="cd-form">
+          <form class="cd-form" id="form-signin">
             <p class="fieldset">
-              <label class="image-replace cd-email" for="signin-email">E-mail</label>
-              <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-              <span class="cd-error-message">Здесь сообщение об ошибке!</span>
+              <label class="image-replace cd-username" for="signin-username">Имя пользователя</label>
+              <input class="full-width has-padding has-border" id="signin-username" type="username" placeholder="Имя пользователя" name="username">
+              <span class="cd-error-message" id="signin-username-error-message">Здесь сообщение об ошибке!</span>
             </p>
             <p class="fieldset">
               <label class="image-replace cd-password" for="signin-password">Пароль</label>
-              <input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Пароль">
-              <a href="#0" class="hide-password">Скрыть</a>
+              <input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Пароль" name="password">
+              <a href="#0" class="hide-password">Показать</a>
               <span class="cd-error-message">Здесь сообщение об ошибке!</span>
             </p>
             <p class="fieldset">
@@ -427,21 +428,21 @@
           <a href="#0" class="cd-close-form">Close</a>
         </div>
         <div id="cd-signup">
-          <form class="cd-form">
+          <form class="cd-form" id="form-signup">
             <p class="fieldset">
               <label class="image-replace cd-username" for="signup-username">Имя пользователя</label>
-              <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Имя пользователя">
+              <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Имя пользователя" name="username">
               <span class="cd-error-message">Здесь сообщение об ошибке!</span>
             </p>
             <p class="fieldset">
               <label class="image-replace cd-email" for="signup-email">E-mail</label>
-              <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+              <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail" name="email">
               <span class="cd-error-message">Здесь сообщение об ошибке!</span>
             </p>
             <p class="fieldset">
               <label class="image-replace cd-password" for="signup-password">Пароль</label>
-              <input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Пароль">
-              <a href="#0" class="hide-password">Скрыть</a>
+              <input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Пароль" name="password">
+              <a href="#0" class="hide-password">Показать</a>
               <span class="cd-error-message">Здесь сообщение об ошибке!</span>
             </p>
             <p class="fieldset">
