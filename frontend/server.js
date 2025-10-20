@@ -6,11 +6,11 @@ const PORT = 3000
 
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
-app.use(express.static('dist'))
+app.use(express.static('dist'));
 
 app.post('/signin', async (req, res) => {
     try {
-        const response = await axios.post('http://localhost:8080/auth/signin', req.body);
+        const response = await axios.post('http://172.20.0.3:8080/auth/signin', req.body);
         res.status(200).json( { backendResponse : response.data } );
     } catch (error) {
         console.error('Error making request to backend:', error);
@@ -20,7 +20,7 @@ app.post('/signin', async (req, res) => {
 
 app.post('/signup', async (req, res) => {
     try {
-        const response = await axios.post('http://localhost:8080/auth/signup', req.body);
+        const response = await axios.post('http://172.20.0.3:8080/auth/signup', req.body);
         res.status(200).json( { backendResponse : response.data } );
     } catch (error) {
         console.error('Error making request to backend:', error);
@@ -30,10 +30,14 @@ app.post('/signup', async (req, res) => {
 
 app.get('/user', async (req, res) => {
     try {
-        const response = await axios.get('http://localhost:8080/secured/user', req);
+        const response = await axios.get('http://172.20.0.3:8080/secured/user', {
+            headers: {
+                "Authorization" : req.headers.authorization
+            }
+        });
         res.status(200).json( { backendResponse : response.data } );
     } catch (error) {
-        console.error('Error making request to backend:', error);
+        console.error('Error making request to backend:', error.message);
         res.status(error.response.status).json( { error: error.message } );
     }
 })

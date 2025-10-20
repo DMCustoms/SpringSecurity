@@ -109,7 +109,6 @@ signinForm.onsubmit = async function(event) {
     })
 
     const authenticationResult = await sendSigninData(credentials);
-    console.log(authenticationResult);
     if (authenticationResult === "Authentication failed") {
         alert("Идентификация не выполнена");
     } else {
@@ -176,7 +175,7 @@ async function getAuthorizationData(token) {
           "Authorization": "Bearer " + token
         }
       });
-    
+
     const backendResponse = await response.json();
     return backendResponse.backendResponse.username;
 }
