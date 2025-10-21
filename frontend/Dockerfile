@@ -1,5 +1,7 @@
 FROM node:trixie-slim
-COPY . /app
 WORKDIR /app
+COPY package.json .
+COPY server.js .
+COPY dist/ ./dist
 RUN npm install --production
-CMD ["npm", "start"]
+ENTRYPOINT ["npm", "start"]
