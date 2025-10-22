@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import browserSync from 'browser-sync';
+// import browserSync from 'browser-sync';
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 import rename from "gulp-rename";
@@ -9,6 +9,7 @@ import htmlmin from 'gulp-htmlmin';
 import image from 'gulp-image';
 
 const sass = gulpSass(dartSass);
+
 // Static server
 // gulp.task('server', function () {
 //     browserSync.init({
@@ -32,15 +33,15 @@ gulp.task('styles', function () {
             cascade: false
         }))
         .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest("dist/css"))
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest("dist/css"));
+        // .pipe(browserSync.stream());
 });
 
-gulp.task('watch', function () {
-    gulp.watch("src/css/*.css").on("change", gulp.parallel('styles'));
-    gulp.watch("src/*.html").on("change", gulp.parallel('html'));
-    gulp.watch("src/js/*.*").on("change", gulp.parallel('scripts'));
-});
+// gulp.task('watch', function () {
+//     gulp.watch("src/css/*.css").on("change", gulp.parallel('styles'));
+//     gulp.watch("src/*.html").on("change", gulp.parallel('html'));
+//     gulp.watch("src/js/*.*").on("change", gulp.parallel('scripts'));
+// });
 
 gulp.task('html', function () {
     return gulp.src("src/*.html")
@@ -64,9 +65,9 @@ gulp.task('icons', function () {
 });
 
 gulp.task('img', function () {
-    gulp.src('src/img/**/*')
+    return gulp.src('src/img/**/*')
         .pipe(image())
         .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task("default", gulp.parallel('watch', 'styles', 'scripts', 'fonts', 'icons', 'html', 'img'));
+gulp.task("default", gulp.parallel('styles', 'scripts', 'fonts', 'icons', 'html', 'img'));
