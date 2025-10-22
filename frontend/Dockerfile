@@ -1,7 +1,11 @@
-FROM chekote/gulp:latest AS build
+FROM node:25 AS build
 WORKDIR /app
 COPY src/ ./src
 COPY gulpfile.js .
+COPY package.json .
+RUN apt-get update && apt-get install -y libimagequant-dev --no-install-recommends
+RUN npm install --global gulp-cli
+RUN npm install
 RUN gulp
 
 FROM node:trixie-slim
