@@ -4,27 +4,30 @@ services:
     build:
       context: ./frontend
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     networks:
       app-network:
-        ipv4_address: 172.16.238.2
+        ipv4_address: ${FRONTEND_ADDR}
     depends_on: 
       - backend
+    environment:
+      - URL=${BACKEND_ADDR}:${BACKEND_PORT}
+      - PORT=${FRONTEND_PORT}
       
   backend:
     image: app-backend
     build:
       context: ./backend/backend
     ports:
-      - "8080:8080"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     networks:
       app-network:
-        ipv4_address: 172.16.238.3
+        ipv4_address: ${BACKEND_ADDR}
     depends_on:
       database:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://172.16.238.4:5432/${DB_NAME}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://${DB_ADDR}:${DB_PORT}/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
 
@@ -36,7 +39,7 @@ services:
       POSTGRES_DB: ${DB_NAME}
     networks:
       app-network:
-        ipv4_address: 172.16.238.4
+        ipv4_address: ${DB_ADDR}
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
@@ -53,7 +56,7 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.16.238.0/24
+        - subnet: ${SUBNET}/${MASK}
 
 volumes:
   db-data:

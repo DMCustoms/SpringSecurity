@@ -407,14 +407,14 @@
           <form class="cd-form" id="form-signin" method="POST">
             <p class="fieldset">
               <label class="image-replace cd-username" for="signin-username">Имя пользователя</label>
-              <input class="full-width has-padding has-border" id="signin-username" type="username" placeholder="Имя пользователя" name="username">
-              <span class="cd-error-message" id="signin-username-error-message">Здесь сообщение об ошибке!</span>
+              <input class="full-width has-padding has-border error-checked" id="signin-username" type="username" placeholder="Имя пользователя" name="username">
+              <span class="cd-error-message" id="signin-username-error-message">Заполните поле!</span>
             </p>
             <p class="fieldset">
               <label class="image-replace cd-password" for="signin-password">Пароль</label>
-              <input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Пароль" name="password">
+              <input class="full-width has-padding has-border error-checked" id="signin-password" type="password"  placeholder="Пароль" name="password" autocomplete="off">
+              <span class="cd-error-message">Заполните поле!</span>
               <a href="#0" class="hide-password">Показать</a>
-              <span class="cd-error-message">Здесь сообщение об ошибке!</span>
             </p>
             <p class="fieldset">
               <input type="checkbox" id="remember-me" checked>
@@ -431,19 +431,19 @@
           <form class="cd-form" id="form-signup" method="POST">
             <p class="fieldset">
               <label class="image-replace cd-username" for="signup-username">Имя пользователя</label>
-              <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Имя пользователя" name="username">
-              <span class="cd-error-message">Здесь сообщение об ошибке!</span>
+              <input class="full-width has-padding has-border error-checked" id="signup-username" type="text" placeholder="Имя пользователя" name="username">
+              <span class="cd-error-message">Заполните поле!</span>
             </p>
             <p class="fieldset">
               <label class="image-replace cd-email" for="signup-email">E-mail</label>
-              <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail" name="email">
-              <span class="cd-error-message">Здесь сообщение об ошибке!</span>
+              <input class="full-width has-padding has-border error-checked" id="signup-email" type="email" placeholder="E-mail" name="email">
+              <span class="cd-error-message">Заполните поле!</span>
             </p>
             <p class="fieldset">
               <label class="image-replace cd-password" for="signup-password">Пароль</label>
-              <input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Пароль" name="password">
+              <input class="full-width has-padding has-border error-checked" id="signup-password" type="password"  placeholder="Пароль" name="password" autocomplete="off">
+              <span class="cd-error-message">Заполните поле!</span>
               <a href="#0" class="hide-password">Показать</a>
-              <span class="cd-error-message">Здесь сообщение об ошибке!</span>
             </p>
             <p class="fieldset">
               <input type="checkbox" id="accept-terms">

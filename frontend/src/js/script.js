@@ -19,7 +19,17 @@ let photoList = page.querySelectorAll('.preview-list a');
 let authContainer = document.querySelector(".auth-container");
 
 let signinForm = document.getElementById("form-signin");
+
+let signinUsernameInput = document.getElementById("signin-username");
+let signinPasswordInput = document.getElementById("signin-password");
+
 let signupForm = document.getElementById("form-signup");
+
+let signupUsernameInput = document.getElementById("signup-username");
+let signupEmailInput = document.getElementById("signup-email");
+let signupPasswordInput = document.getElementById("signup-password");
+
+let inputFields = document.querySelectorAll(".error-checked");
 
 let authorizedUserContainer = document.querySelector(".authorized-user-container");
 let authorizedUserName = document.querySelector(".authorized-user-container p");
@@ -83,6 +93,13 @@ for (let photo of photoList) {
     }
 }
 
+for (let inputField of inputFields) {
+    inputField.oninput = function() {
+        inputField.classList.remove('has-error');
+        inputField.nextElementSibling.classList.remove('is-visible');
+    }
+}
+
 async function setAuthorized() {
     let token = localStorage.getItem("token");
     if (token === null) {
@@ -98,47 +115,56 @@ async function setAuthorized() {
 
 signinForm.onsubmit = async function(event) {
     event.preventDefault();
-    const { elements } = signinForm;
     
     let credentials = new Object();
 
-    Array.from(elements)
-        .forEach((element) => {
-        if (element.name === 'username') credentials.username = element.value;
-        else if (element.name === 'password') credentials.password = element.value;
-    })
-
-    const authenticationResult = await sendSigninData(credentials);
-    if (authenticationResult === "Authentication failed") {
-        alert("Идентификация не выполнена");
+    if (signinUsernameInput.value === '') {
+        signinUsernameInput.classList.add('has-error');
+        signinUsernameInput.nextElementSibling.classList.add('is-visible');
+    } else if (signinPasswordInput.value === '') {
+        signinPasswordInput.classList.add('has-error');
+        signinPasswordInput.nextElementSibling.classList.add('is-visible');
     } else {
-        localStorage.setItem("token", authenticationResult);
-        window.location.reload();
+        credentials.username = signinUsernameInput.value;
+        credentials.password = signinPasswordInput.value;
+        const authenticationResult = await sendSigninData(credentials);
+        if (authenticationResult === "Authentication failed") {
+            alert("Идентификация не выполнена");
+        } else {
+            localStorage.setItem("token", authenticationResult);
+            window.location.reload();
+        }
     }
 }
 
 signupForm.onsubmit = async function(event) {
     event.preventDefault();
-    const { elements } = signupForm;
 
     let credentials = new Object();
       
-    Array.from(elements)
-        .forEach((element) => {
-        if (element.name === 'username') credentials.username = element.value;
-        else if (element.name === 'email') credentials.email = element.value;
-        else if (element.name === 'password') credentials.password = element.value;
-    })
-
-    const registrationResult = await sendSignupData(credentials);
-    if (registrationResult === "Choose different name") {
-        alert("Пользователь с таким именем уже зарегистрирован");
-    } else if (registrationResult === "Choose different email") {
-        alert("Такой адрес электронной почты уже используется");
+    if (signupUsernameInput.value === '') {
+        signupUsernameInput.classList.add('has-error');
+        signupUsernameInput.nextElementSibling.classList.add('is-visible');
+    } else if (signupEmailInput.value === '') {
+        signupEmailInput.classList.add('has-error');
+        signupEmailInput.nextElementSibling.classList.add('is-visible');
+    } else if (signupPasswordInput.value === '') {
+        signupPasswordInput.classList.add('has-error');
+        signupPasswordInput.nextElementSibling.classList.add('is-visible');
     } else {
-        alert("Пользователь зарегистрирован");
-        window.location.reload();
-    }     
+        credentials.username = signupUsernameInput.value;
+        credentials.email = signupEmailInput.value;
+        credentials.password = signupPasswordInput.value;
+        const registrationResult = await sendSignupData(credentials);
+        if (registrationResult === "Choose different name") {
+            alert("Пользователь с таким именем уже зарегистрирован");
+        } else if (registrationResult === "Choose different email") {
+            alert("Такой адрес электронной почты уже используется");
+        } else {
+            alert("Пользователь зарегистрирован");
+            window.location.reload();
+        }     
+    }   
 }
 
 async function sendSigninData(credentials) {
